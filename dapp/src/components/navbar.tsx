@@ -1,6 +1,4 @@
 import { FC } from "react";
-import { useSelector } from "react-redux";
-import { IAppState } from "./../store/reducers";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -16,15 +14,12 @@ const Container = styled.div`
   font-size: 1.5em;
 `;
 
-const Home: FC = () => {
-  const store = useSelector((state: IAppState) => state);
-
-  console.log(store.appState.walls);
+const Navbar: FC = () => {
   return (
     <Container>
-      <div>Maxime</div>
+      <div>The Wall</div>
     </Container>
   );
 };
 
-export default Home;
+export default Navbar;

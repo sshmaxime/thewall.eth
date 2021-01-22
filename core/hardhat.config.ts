@@ -1,28 +1,37 @@
-import { task } from "hardhat/config";
+import { task, HardhatUserConfig } from "hardhat/config";
 import "@nomiclabs/hardhat-waffle";
 import "@nomiclabs/hardhat-ethers";
 import "hardhat-typechain";
 
+import env from "./config";
 
-task("accounts", "Prints the list of accounts", async (args, hre) => {
-  const accounts = await hre.ethers.getSigners();
-
-  for (const account of accounts) {
-    console.log(account.address);
-  }
-});
-
-// You need to export an object to set up your config
-// Go to https://hardhat.org/config/ to learn more
-
-/**
- * @type import('hardhat/config').HardhatUserConfig
- */
-export default {
+const config: HardhatUserConfig = {
   paths: {
     sources: "./contracts",
     tests: "./test",
-    artifacts: "./artifacts"
+    artifacts: "./artifacts",
   },
-  solidity: "0.7.3",
+  solidity: {
+    version: "0.7.3",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
+    },
+  },
+  //
+  networks: {
+    hardhat: {
+      chainId: 1337,
+      accounts: [
+        {
+          privateKey: env.dev_secret,
+          balance: "10000000000000000000000",
+        },
+      ],
+    },
+  },
 };
+
+export default config;
