@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import { utils } from "ethers";
-import { ethers } from "hardhat";
-import Web3 from "web3";
+import { ethers, network } from "hardhat";
+import { TheWallLib } from "../lib/lib";
 
-const provider = new Web3.providers.HttpProvider("http://localhost:8545");
-
-describe("Relay Lib Tests", () => {});
+describe("Relay Lib Tests", () => {
+  it("Test_Lib", async () => {});
+});

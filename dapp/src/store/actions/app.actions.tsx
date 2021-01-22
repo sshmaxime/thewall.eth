@@ -9,11 +9,14 @@ import { brick } from "../models/data";
 export const INIT = "INIT";
 export interface ActionInit {
   type: typeof INIT;
-  payload: -1 | 0 | 1; // -1 == error loading // 0 == loading // 1 == loaded
+  payload: {
+    ready: -1 | 0 | 1; // -1 == error loading // 0 == loading // 1 == loaded
+    address: string;
+  };
 }
 
 export const init = () => {
-  const toDispatch = (payload: -1 | 0 | 1): ActionInit => {
+  const toDispatch = (payload: { ready: -1 | 0 | 1; address: string }): ActionInit => {
     return {
       type: INIT,
       payload: payload,
@@ -24,14 +27,10 @@ export const init = () => {
     try {
       await sdk.ready;
 
-      // Fetch my wall
-      dispatch(fetchWall(sdk.address));
-      //
-
-      return dispatch(toDispatch(1));
+      return dispatch(toDispatch({ ready: 1, address: sdk.address }));
     } catch (err: any) {
       console.log(err);
-      return dispatch(toDispatch(-1));
+      return dispatch(toDispatch({ ready: -1, address: "" }));
     }
   };
 };
@@ -45,7 +44,7 @@ export interface ActionFetchWallData {
   payload: { address: string; data: brick[] };
 }
 
-export const fetchWall = (address: string) => {
+export const fetchWallData = (address: string) => {
   const toDispatch = (payload: { address: string; data: brick[] }): ActionFetchWallData => {
     return {
       type: FETCH_WALL_DATA,
@@ -58,6 +57,26 @@ export const fetchWall = (address: string) => {
       return dispatch(
         toDispatch({ address: address, data: await sdk.smartContract.inspect(address) }),
       );
+    } catch (err: any) {
+      console.log(err);
+      return;
+    }
+  };
+};
+
+////////////////////
+// SEND_WALL_DATA //
+////////////////////
+export const SEND_WALL_DATA = "SEND_WALL_DATA";
+export interface ActionSendWallData {
+  type: typeof SEND_WALL_DATA;
+  payload: { address: string; data: brick[] };
+}
+
+export const sendWallData = (address: string, message: string) => {
+  return async (dispatch: any, getState: () => IAppState) => {
+    try {
+      await sdk.smartContract.build(address, message);
     } catch (err: any) {
       console.log(err);
       return;

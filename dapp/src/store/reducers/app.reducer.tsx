@@ -5,12 +5,14 @@ const commonConstants = {};
 
 export type appState = {
   ready: -1 | 0 | 1;
+  address: string;
   walls: Map<string, brick[]>;
 };
 
 const appStateReducer = (
   state: appState = {
     ready: 0,
+    address: "",
     walls: new Map(),
   },
   action: AppActionTypes,
@@ -19,7 +21,8 @@ const appStateReducer = (
     case INIT:
       return {
         ...state,
-        ready: action.payload,
+        ready: action.payload.ready,
+        address: action.payload.address,
       };
     case FETCH_WALL_DATA:
       state.walls.set(action.payload.address, action.payload.data);

@@ -13,28 +13,25 @@ export class TheWallLib {
   //
   address: string;
 
+  //
   public smartContract: TheWall;
-  constructor(providerParam?: any) {
+
+  constructor(providerParam?: ethers.providers.Web3Provider) {
     this.ready = new Promise<void>(async (resolve, reject) => {
-      let provider: ethers.providers.Web3Provider;
+      let provider: ethers.providers.Web3Provider = providerParam as any;
 
       try {
         if (!providerParam) {
-          const web3 = await detectEthereumProvider();
-          provider = new ethers.providers.Web3Provider(web3 as any);
+          provider = new ethers.providers.Web3Provider((await detectEthereumProvider()) as any);
           await (provider.provider as any).enable();
-        } else {
-          provider = new ethers.providers.Web3Provider(
-            providerParam as ethers.providers.ExternalProvider,
-          );
         }
+
         this.smartContract = TheWall__factory.connect(
           localHardhatAddress,
           provider.getSigner(),
         ) as TheWall;
 
-        // Fetch metamask address
-        this.address = await provider.getSigner().provider.getSigner().getAddress();
+        this.address = await provider.getSigner().getAddress();
 
         return resolve();
       } catch (error) {

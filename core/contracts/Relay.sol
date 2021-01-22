@@ -14,7 +14,7 @@ struct Brick {
 contract TheWall {
     mapping(address => Brick[]) public walls;
 
-    function build(string calldata _message, address _building) public {
+    function build(address _building, string calldata _message) public {
         walls[_building].push(Brick({builder: msg.sender, message: _message}));
     }
 

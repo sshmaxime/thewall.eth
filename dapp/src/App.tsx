@@ -2,11 +2,12 @@ import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { init } from "./store/actions/app.actions";
 import { IAppState } from "./store/reducers";
-import Navbar from "./components/navbar";
+import Navbar from "./statefulComponents/navbar";
 import styled from "styled-components";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/home";
+import Wall from "./pages/wall";
 
 const ErrorLoadingApp: FC<any> = () => {
   return <div>Error</div>;
@@ -37,12 +38,9 @@ const App: FC = () => {
   return (
     <Router>
       <Container>
-        <Navbar />
-        <div style={{ height: "30px" }} />
         <Switch>
-          <Route path="/">
-            <Home />
-          </Route>
+          <Route path="/building/:address" component={Wall} />
+          <Route path="/" component={Home} />
         </Switch>
       </Container>
     </Router>

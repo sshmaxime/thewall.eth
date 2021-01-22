@@ -1,14 +1,18 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
 import { IAppState } from "./../store/reducers";
+import Page from "../components/page";
+import Brick from "../components/brick";
+import Spacing from "../components/spacing";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 const Container = styled.div`
-  height: 50px;
-  background: linear-gradient(145deg, #f3f7ff, #ccd0db);
-  border-radius: 0% 0% 40px 40px;
+  border-radius: 20px 20px 20px 20px;
+  background: #e3e7f3;
+  box-shadow: 10px 10px 2px #c1c4cf, -10px -10px 2px #ffffff;
 
-  padding: 30px;
+  padding: 20px;
   padding-left: 20%;
   padding-right: 20%;
 
@@ -17,13 +21,17 @@ const Container = styled.div`
 `;
 
 const Home: FC = () => {
+  const history = useHistory();
   const store = useSelector((state: IAppState) => state);
 
-  console.log(store.appState.walls);
+  if (store.appState.address) {
+    history.push("/building/" + store.appState.address);
+  }
+
   return (
-    <Container>
-      <div>Maxime</div>
-    </Container>
+    <Page>
+      <Container>Welcome !</Container>
+    </Page>
   );
 };
 
