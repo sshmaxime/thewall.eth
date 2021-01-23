@@ -76,15 +76,33 @@ export interface ActionSendWallData {
 export const sendWallData = (address: string, message: string) => {
   return async (dispatch: any, getState: () => IAppState) => {
     try {
+      dispatch({ type: LOADING_SEND_MESSAGE, payload: {} });
       let transaction = await sdk.build(address, message);
       if (transaction) {
+        dispatch({ type: STOP_LOADING_SEND_MESSAGE, payload: {} });
         dispatch(fetchWallData(address));
       }
     } catch (err: any) {
+      dispatch({ type: STOP_LOADING_SEND_MESSAGE, payload: {} });
       console.log(err);
       return;
     }
   };
 };
 
-export type AppActionTypes = ActionInit | ActionFetchWallData;
+export const LOADING_SEND_MESSAGE = "LOADING_SEND_MESSAGE";
+export interface ActionLoadingSendMessage {
+  type: typeof LOADING_SEND_MESSAGE;
+  payload: {};
+}
+export const STOP_LOADING_SEND_MESSAGE = "STOP_LOADING_SEND_MESSAGE";
+export interface ActionStopLoadingSendMessage {
+  type: typeof STOP_LOADING_SEND_MESSAGE;
+  payload: {};
+}
+
+export type AppActionTypes =
+  | ActionInit
+  | ActionFetchWallData
+  | ActionLoadingSendMessage
+  | ActionStopLoadingSendMessage;

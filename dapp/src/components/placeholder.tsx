@@ -29,7 +29,7 @@ const Placeholder: FC<{ value: string; onChange: any }> = ({ value, onChange }) 
             type="text"
             value={value}
             onChange={onChange}
-            placeholder="Look for an address ..."
+            placeholder="Lookup for an address ..."
           />
         </div>
         <div style={{ width: "10px" }}></div>

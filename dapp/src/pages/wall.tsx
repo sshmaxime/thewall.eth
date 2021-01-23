@@ -11,6 +11,9 @@ import { fetchWallData, sendWallData } from "../store/actions/app.actions";
 import { motion } from "framer-motion";
 import { Title } from "../components/text";
 import Placeholder from "../components/realPlaceholder";
+import Loader from "react-loader-spinner";
+
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 interface props
   extends RouteComponentProps<{
@@ -91,13 +94,18 @@ const Wall: FC<props> = ({ match }) => {
           <>
             <motion.div animate={modalIsOpen ? "open" : "closed"} variants={variants0}>
               <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-                <Icon
-                  icon={ImgSend}
-                  height={"75px"}
-                  onClick={() => {
-                    triggerModal();
-                  }}
-                />
+                {!store.appState.loadSendMessage ? (
+                  <Icon
+                    icon={ImgSend}
+                    height={"75px"}
+                    onClick={() => {
+                      triggerModal();
+                    }}
+                  />
+                ) : (
+                  <Loader type="TailSpin" color="black" height={40} width={40} />
+                )}
+
                 <motion.div
                   onKeyDown={nav}
                   animate={modalIsOpen ? "open" : "closed"}
@@ -113,7 +121,7 @@ const Wall: FC<props> = ({ match }) => {
 
       <div style={{ height: "20px" }} />
 
-      {(bricks &&
+      {bricks &&
         bricks.map((elem, index) => {
           return (
             <Fragment key={index}>
@@ -121,7 +129,17 @@ const Wall: FC<props> = ({ match }) => {
               <Spacing height={50} />
             </Fragment>
           );
-        })) || <>It is empty :(</>}
+        })}
+
+      {bricks?.length === 0 ? (
+        isMyWall ? (
+          <div style={{ fontFamily: "Montserrat" }}>You don't have any message :(</div>
+        ) : (
+          <div style={{ fontFamily: "Montserrat" }}>
+            Your friend doesn't have any message :( send him one !
+          </div>
+        )
+      ) : null}
     </Page>
   );
 };

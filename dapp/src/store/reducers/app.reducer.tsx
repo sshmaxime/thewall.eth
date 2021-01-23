@@ -1,4 +1,10 @@
-import { INIT, FETCH_WALL_DATA, AppActionTypes } from "../actions/app.actions";
+import {
+  INIT,
+  FETCH_WALL_DATA,
+  AppActionTypes,
+  LOADING_SEND_MESSAGE,
+  STOP_LOADING_SEND_MESSAGE,
+} from "../actions/app.actions";
 import { brick } from "../models/data";
 
 const commonConstants = {};
@@ -6,6 +12,7 @@ const commonConstants = {};
 export type appState = {
   ready: -1 | 0 | 1;
   address: string;
+  loadSendMessage: boolean;
   walls: Map<string, brick[]>;
 };
 
@@ -13,6 +20,7 @@ const appStateReducer = (
   state: appState = {
     ready: 0,
     address: "",
+    loadSendMessage: false,
     walls: new Map(),
   },
   action: AppActionTypes,
@@ -29,6 +37,16 @@ const appStateReducer = (
       return {
         ...state,
         walls: state.walls,
+      };
+    case LOADING_SEND_MESSAGE:
+      return {
+        ...state,
+        loadSendMessage: true,
+      };
+    case STOP_LOADING_SEND_MESSAGE:
+      return {
+        ...state,
+        loadSendMessage: false,
       };
     default:
       return {
