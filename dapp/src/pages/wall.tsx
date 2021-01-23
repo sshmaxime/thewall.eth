@@ -8,6 +8,9 @@ import { RouteComponentProps } from "react-router-dom";
 import Icon from "../components/icon";
 import ImgSend from "../assets/message.png";
 import { fetchWallData, sendWallData } from "../store/actions/app.actions";
+import { motion } from "framer-motion";
+import { Title } from "../components/text";
+import Placeholder from "../components/realPlaceholder";
 
 interface props
   extends RouteComponentProps<{
@@ -15,7 +18,6 @@ interface props
   }> {}
 
 const defaultState = {
-  address: "",
   message: "",
 };
 
@@ -23,44 +25,103 @@ const Wall: FC<props> = ({ match }) => {
   const dispatch = useDispatch();
   const store = useSelector((state: IAppState) => state);
   const [state, setState] = useState(defaultState);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const triggerModal = () => {
+    setIsOpen(!modalIsOpen);
+  };
 
   useEffect(() => {
     dispatch(fetchWallData(match.params.address));
   }, [dispatch]);
 
-  const bricks = store.appState.walls.get(match.params.address);
-  if (!bricks) {
-    return <Page>Well, nothing here :(</Page>;
-  }
+  let bricks = store.appState.walls.get(match.params.address);
+  bricks = bricks?.slice().reverse();
+
+  const isMyWall = match.params.address === store.appState.address;
+
+  const variants0 = {
+    open: { x: -200 },
+    closed: { x: 0 },
+  };
+
+  const variants = {
+    open: { display: "block", opacity: 1, x: 0, y: 20 },
+    closed: {
+      display: "none",
+      opacity: 0,
+      x: 0,
+      transition: {
+        staggerChildren: 0.05,
+        staggerDirection: -1,
+        when: "afterChildren",
+      },
+    },
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setState({ message: e.target.value });
+  };
+
+  const nav = (e: any) => {
+    if (e.key === "Enter") {
+      dispatch(sendWallData(match.params.address, state.message));
+      setState({ message: "" });
+      setIsOpen(false);
+    }
+  };
 
   return (
     <Page>
       <div
         style={{
-          fontSize: "1.2em",
+          fontSize: "1.3em",
           fontFamily: "Lato",
           textAlign: "center",
           marginBottom: "20px",
           textShadow: "2px 2px 0px rgba(130, 140, 255, 1)",
           color: "white",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
         {match.params.address}
+        {isMyWall ? null : (
+          <>
+            <motion.div animate={modalIsOpen ? "open" : "closed"} variants={variants0}>
+              <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+                <Icon
+                  icon={ImgSend}
+                  height={"75px"}
+                  onClick={() => {
+                    triggerModal();
+                  }}
+                />
+                <motion.div
+                  onKeyDown={nav}
+                  animate={modalIsOpen ? "open" : "closed"}
+                  variants={variants}
+                >
+                  <Placeholder value={state.message} onChange={handleChange} />
+                </motion.div>
+              </div>
+            </motion.div>
+          </>
+        )}
       </div>
-      <Icon
-        icon={ImgSend}
-        onClick={() => {
-          dispatch(sendWallData(state.address, state.message));
-        }}
-      />
-      {bricks.map((elem, index) => {
-        return (
-          <Fragment key={index}>
-            <Brick address={elem.builder} message={elem.message} />
-            <Spacing height={50} />
-          </Fragment>
-        );
-      })}
+
+      <div style={{ height: "20px" }} />
+
+      {(bricks &&
+        bricks.map((elem, index) => {
+          return (
+            <Fragment key={index}>
+              <Brick address={elem.builder} message={elem.message} />
+              <Spacing height={50} />
+            </Fragment>
+          );
+        })) || <>It is empty :(</>}
     </Page>
   );
 };

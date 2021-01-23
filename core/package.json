@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "hdnode": "hardhat node",
+    "hh": "hardhat node",
     "build": "hardhat compile && hardhat typechain && yarn tsc",
     "lib": "hardhat typechain && yarn tsc",
     "deploy": "hardhat run scripts/deploy.ts --network localhost",

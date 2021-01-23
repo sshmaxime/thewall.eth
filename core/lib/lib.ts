@@ -39,4 +39,16 @@ export class TheWallLib {
       }
     });
   }
+
+  build = async (address: string, message: string): Promise<boolean> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const transaction = await this.smartContract.build(address, message);
+        await transaction.wait(1);
+        resolve(true);
+      } catch (e) {
+        resolve(false);
+      }
+    });
+  };
 }

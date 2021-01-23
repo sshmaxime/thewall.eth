@@ -17,7 +17,7 @@ const LoadingApp: FC<any> = () => {
 };
 
 const Container = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(145deg, #dfe3f0, #bbbfca);
 `;
 

@@ -76,7 +76,10 @@ export interface ActionSendWallData {
 export const sendWallData = (address: string, message: string) => {
   return async (dispatch: any, getState: () => IAppState) => {
     try {
-      await sdk.smartContract.build(address, message);
+      let transaction = await sdk.build(address, message);
+      if (transaction) {
+        dispatch(fetchWallData(address));
+      }
     } catch (err: any) {
       console.log(err);
       return;

@@ -11,6 +11,7 @@ struct Brick {
     string message;
 }
 
+// This smart contract is very insecure
 contract TheWall {
     mapping(address => Brick[]) public walls;
 

@@ -30,10 +30,7 @@ const Title_ = styled.div<{ fontStyle?: string }>`
   color: #c1c1c1;
   font-weight: 400;
   letter-spacing: -1px;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
+  text-align: right;
   font-style: ${(props) => props.fontStyle};
 `;
 

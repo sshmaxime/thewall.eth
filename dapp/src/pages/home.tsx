@@ -5,7 +5,7 @@ import Page from "../components/page";
 import Brick from "../components/brick";
 import Spacing from "../components/spacing";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 const Container = styled.div`
   border-radius: 20px 20px 20px 20px;
@@ -25,7 +25,7 @@ const Home: FC = () => {
   const store = useSelector((state: IAppState) => state);
 
   if (store.appState.address) {
-    history.push("/building/" + store.appState.address);
+    return <Redirect to={"/building/" + store.appState.address} />;
   }
 
   return (

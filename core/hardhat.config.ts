@@ -11,16 +11,15 @@ import "@nomiclabs/hardhat-web3";
 import "hardhat/config";
 import { ethers } from "ethers";
 
-const web3Provider = new Web3.providers.HttpProvider("http://localhost:8545");
-const provider = new ethers.providers.Web3Provider(web3Provider as any);
+const provider = new ethers.providers.Web3Provider(
+  new Web3.providers.HttpProvider("http://localhost:8545") as any,
+);
 
 task("populate", "Populate contracts", async (args, hre) => {
   const lib = new TheWallLib(provider);
   try {
     await lib.ready;
-
     await lib.smartContract.build("0xd8b0e9a3630eea400cdebc15b9380ad20a03f95b", "Hello its me");
-    await lib.smartContract.inspect("0xd8b0e9a3630eea400cdebc15b9380ad20a03f95b");
   } catch (e) {
     console.log(e);
   }

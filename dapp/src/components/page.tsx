@@ -3,8 +3,8 @@ import styled from "styled-components";
 import Navbar from "../statefulComponents/navbar";
 
 const Container = styled.div`
-  padding-left: 25%;
-  padding-right: 25%;
+  padding-left: 20%;
+  padding-right: 20%;
 `;
 
 const Page: FC = ({ children }) => {
