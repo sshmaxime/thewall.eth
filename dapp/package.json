@@ -15,7 +15,7 @@
     "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.7",
     "bootstrap": "^4.5.3",
-    "core": "link:./../core",
+    "core": "./../core",
     "framer-motion": "^3.2.2-rc.1",
     "node-sass": "4",
     "react": "^17.0.1",
