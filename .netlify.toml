@@ -1,4 +1,3 @@
 [build]
-  base = "dapp/"
-  publish = "build/"
+  publish = "dapp/build"
 
