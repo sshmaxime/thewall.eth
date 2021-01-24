@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/sshmaxime/thewall.eth/static/css/main.74ee612a.chunk.css",
+    "main.js": "/sshmaxime/thewall.eth/static/js/main.914bbfac.chunk.js",
+    "main.js.map": "/sshmaxime/thewall.eth/static/js/main.914bbfac.chunk.js.map",
+    "runtime-main.js": "/sshmaxime/thewall.eth/static/js/runtime-main.3b8cf4e5.js",
+    "runtime-main.js.map": "/sshmaxime/thewall.eth/static/js/runtime-main.3b8cf4e5.js.map",
+    "static/css/2.f2c13908.chunk.css": "/sshmaxime/thewall.eth/static/css/2.f2c13908.chunk.css",
+    "static/js/2.73d5a2d5.chunk.js": "/sshmaxime/thewall.eth/static/js/2.73d5a2d5.chunk.js",
+    "static/js/2.73d5a2d5.chunk.js.map": "/sshmaxime/thewall.eth/static/js/2.73d5a2d5.chunk.js.map",
+    "static/js/3.dedffeb8.chunk.js": "/sshmaxime/thewall.eth/static/js/3.dedffeb8.chunk.js",
+    "static/js/3.dedffeb8.chunk.js.map": "/sshmaxime/thewall.eth/static/js/3.dedffeb8.chunk.js.map",
+    "index.html": "/sshmaxime/thewall.eth/index.html",
+    "static/css/2.f2c13908.chunk.css.map": "/sshmaxime/thewall.eth/static/css/2.f2c13908.chunk.css.map",
+    "static/css/main.74ee612a.chunk.css.map": "/sshmaxime/thewall.eth/static/css/main.74ee612a.chunk.css.map",
+    "static/js/2.73d5a2d5.chunk.js.LICENSE.txt": "/sshmaxime/thewall.eth/static/js/2.73d5a2d5.chunk.js.LICENSE.txt",
+    "static/media/message.a137cdff.png": "/sshmaxime/thewall.eth/static/media/message.a137cdff.png",
+    "static/media/search.69f7f9ea.png": "/sshmaxime/thewall.eth/static/media/search.69f7f9ea.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3b8cf4e5.js",
+    "static/css/2.f2c13908.chunk.css",
+    "static/js/2.73d5a2d5.chunk.js",
+    "static/css/main.74ee612a.chunk.css",
+    "static/js/main.914bbfac.chunk.js"
+  ]
+}
