@@ -52,7 +52,7 @@ const config: HardhatUserConfig = {
       ],
     },
     kovan: {
-      url: "https://kovan.infura.io/v3/***REMOVED***",
+      url: env.infura_kovan_api,
       accounts: [env.dev_secret],
     },
   },
