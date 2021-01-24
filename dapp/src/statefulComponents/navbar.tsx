@@ -60,6 +60,7 @@ const Navbar: FC<props> = ({ match }) => {
   const nav = (e: any) => {
     if (e.key === "Enter") {
       setState({ searchField: "" });
+      dispatch(fetchWallData(state.searchField));
       history.push("/building/" + state.searchField);
     }
   };
