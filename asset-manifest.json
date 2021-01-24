@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/thewall.eth/static/css/main.74ee612a.chunk.css",
-    "main.js": "/thewall.eth/static/js/main.4c073de5.chunk.js",
-    "main.js.map": "/thewall.eth/static/js/main.4c073de5.chunk.js.map",
+    "main.js": "/thewall.eth/static/js/main.e8e76768.chunk.js",
+    "main.js.map": "/thewall.eth/static/js/main.e8e76768.chunk.js.map",
     "runtime-main.js": "/thewall.eth/static/js/runtime-main.518a00d2.js",
     "runtime-main.js.map": "/thewall.eth/static/js/runtime-main.518a00d2.js.map",
     "static/css/2.f2c13908.chunk.css": "/thewall.eth/static/css/2.f2c13908.chunk.css",
@@ -22,6 +22,6 @@
     "static/css/2.f2c13908.chunk.css",
     "static/js/2.2d562e17.chunk.js",
     "static/css/main.74ee612a.chunk.css",
-    "static/js/main.4c073de5.chunk.js"
+    "static/js/main.e8e76768.chunk.js"
   ]
 }
