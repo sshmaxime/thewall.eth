@@ -36,7 +36,7 @@ const App: FC = () => {
   }
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Container>
         <Switch>
           <Route path="/building/:address" component={Wall} />
