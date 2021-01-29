@@ -33,6 +33,9 @@ export class TheWallLib {
 
         this.address = await provider.getSigner().getAddress();
 
+        if ((await provider.getCode(localHardhatAddress)) == "0x") {
+          return reject("no code");
+        }
         return resolve();
       } catch (error) {
         return reject(error);

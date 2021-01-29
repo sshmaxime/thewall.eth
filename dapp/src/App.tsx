@@ -2,14 +2,18 @@ import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { init } from "./store/actions/app.actions";
 import { IAppState } from "./store/reducers";
-import Navbar from "./statefulComponents/navbar";
 import styled from "styled-components";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/home";
 import Wall from "./pages/wall";
 
 const ErrorLoadingApp: FC<any> = () => {
+  useEffect(() => {
+    toast("An error occured, please check that you are on Kovan testnet :) !", { type: "error" });
+  }, []);
   return <div>Error</div>;
 };
 const LoadingApp: FC<any> = () => {

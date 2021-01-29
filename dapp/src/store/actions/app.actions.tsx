@@ -58,6 +58,7 @@ export const fetchWallData = (address: string) => {
         toDispatch({ address: address, data: await sdk.smartContract.inspect(address) }),
       );
     } catch (err: any) {
+      console.log("1");
       console.log(err);
       return;
     }
