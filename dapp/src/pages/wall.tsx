@@ -1,7 +1,7 @@
 import { FC, Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IAppState } from "./../store/reducers";
-import Page from "../components/page";
+import Page from "../statefulComponents/page";
 import Brick from "../components/brick";
 import Spacing from "../components/spacing";
 import { RouteComponentProps } from "react-router-dom";

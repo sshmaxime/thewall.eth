@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
 import { IAppState } from "./../store/reducers";
-import Page from "../components/page";
+import Page from "../statefulComponents/page";
 import Brick from "../components/brick";
 import Spacing from "../components/spacing";
 import styled from "styled-components";
@@ -21,7 +21,6 @@ const Container = styled.div`
 `;
 
 const Home: FC = () => {
-  const history = useHistory();
   const store = useSelector((state: IAppState) => state);
 
   if (store.appState.address) {

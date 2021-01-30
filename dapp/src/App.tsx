@@ -1,24 +1,15 @@
 import React, { FC, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { init } from "./store/actions/app.actions";
-import { IAppState } from "./store/reducers";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { ToastContainer, toast } from "react-toastify";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./pages/home";
-import Wall from "./pages/wall";
+import Header from "./appComponents/header";
+import Body from "./appComponents/body";
+import Footer from "./appComponents/footer";
+import Utils from "./appComponents/utils";
 
-const ErrorLoadingApp: FC<any> = () => {
-  useEffect(() => {
-    toast("An error occured, please check that you are on Kovan testnet :) !", { type: "error" });
-  }, []);
-  return <div>Error</div>;
-};
-const LoadingApp: FC<any> = () => {
-  return <div>Loading</div>;
-};
+import { init } from "./store/actions/app.actions";
 
 const Container = styled.div`
   min-height: 100vh;
@@ -27,28 +18,20 @@ const Container = styled.div`
 
 const App: FC = () => {
   const dispatch = useDispatch();
-  const store = useSelector((state: IAppState) => state);
 
   useEffect(() => {
     dispatch(init());
   }, [dispatch]);
 
-  if (store.appState.ready === 0) {
-    return <LoadingApp />;
-  } else if (store.appState.ready === -1) {
-    return <ErrorLoadingApp />;
-  }
-
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router>
       <Container>
-        <Switch>
-          <Route path="/building/:address" component={Wall} />
-          <Route path="/" component={Home} />
-        </Switch>
+        <Header />
+        <Body />
+        <Footer />
+        <Utils />
       </Container>
     </Router>
   );
 };
-
 export default App;

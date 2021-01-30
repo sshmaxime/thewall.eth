@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
-import Navbar from "../statefulComponents/navbar";
+import Navbar from "./navbar";
 
 const Container = styled.div`
   padding-left: 20%;
@@ -8,13 +8,7 @@ const Container = styled.div`
 `;
 
 const Page: FC = ({ children }) => {
-  return (
-    <>
-      <Navbar />
-      <div style={{ height: "50px" }} />
-      <Container>{children}</Container>
-    </>
-  );
+  return <Container>{children}</Container>;
 };
 
 export default Page;
